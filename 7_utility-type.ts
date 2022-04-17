@@ -172,3 +172,14 @@ interface Addresses {
 }
 
 type AddressesRecord = Record<'home' | 'office', Address>;
+
+/**
+ * Exclude - UnionType에서 제외하여 type을 생성한다.
+ */
+type something = 'abc' | 'bcd' | 'cde' | 'def';
+
+type somethingWithExclude = Exclude<something, 'def'>;
+
+type mappedTypeWithExclude = {
+  [k in somethingWithExclude]: string;
+};

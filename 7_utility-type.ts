@@ -143,3 +143,17 @@ interface Product2 {
 // }
 // Good practice ✅
 type RequiredProduct = Required<Product2>;
+
+/**
+ * ReadOnly - Type의 속성을 readOnly(읽기 전용)으로 지정할 수 있게 해준다.
+ */
+interface User {
+  role: string;
+}
+// Bad practice 💩
+// const user: User = { role: 'ADMIN' };
+// user.role = 'USER';
+// Good practice ✅
+type ReadonlyUser = Readonly<User>;
+const user: ReadonlyUser = { role: 'ADMIN' };
+//user.role = 'USER'; Error: Cannot assign to 'role' because it is a read-only property.

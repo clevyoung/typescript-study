@@ -1,3 +1,5 @@
+// https://typescript-kr.github.io/pages/advanced-types.html 참조
+
 interface Product {
   id: number;
   name: string;

@@ -157,3 +157,18 @@ interface User {
 type ReadonlyUser = Readonly<User>;
 const user: ReadonlyUser = { role: 'ADMIN' };
 //user.role = 'USER'; Error: Cannot assign to 'role' because it is a read-only property.
+
+/**
+ * Record - Record<K, T> 프로퍼티 키 값을 K 타입으로, 값을 T 타입으로 하는 타입을 만들 수 있다.
+ */
+
+interface Address {
+  street: string;
+  pin: number;
+}
+interface Addresses {
+  home: Address;
+  office: Address;
+}
+
+type AddressesRecord = Record<'home' | 'office', Address>;

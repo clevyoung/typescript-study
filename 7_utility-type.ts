@@ -200,3 +200,23 @@ interface UserProfile2 {
 }
 
 type ProfileSpecificKeys = Exclude<keyof UserProfile2, keyof UserBase>;
+
+/**
+ * Extract - Type에서 Union에 할당 가능한 모든 Union 멤버를 추출하여 타입을 구성한다.
+ */
+
+type SharedUserKeys = Extract<keyof UserBase, keyof UserProfile2>;
+
+type SharedUserData = {
+  [K in SharedUserKeys]: UserProfile2[K];
+};
+
+type IntersectingTypes<T, U> = {
+  [K in Extract<keyof T, keyof U>]: T[K];
+};
+
+const user2: IntersectingTypes<UserBase, UserProfile2> = {
+  email: 'test@example.com',
+  image: null,
+  username: 'sampleuser',
+};

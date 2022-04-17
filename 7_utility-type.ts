@@ -6,17 +6,14 @@ interface Product {
   stock: number;
 }
 
-// 1. 상품 목록을 받아오기 위한 API 함수
-function fetchProduct(): Promise<Product[]> {}
-
-// Pick - 특정 타입에서 몇 개의 속성을 선택하여 타입을 정의할 수 있다.
+/**
+ * Pick - 특정 타입에서 몇 개의 속성을 선택하여 타입을 정의할 수 있다.
+ */
 type ShoppingItem = Pick<Product, 'id' | 'name' | 'price'>;
 
-// 2. 특정 상품의 상세 정보를 나타내기 위한 함수
-function displayProductDetail(shoppingItem: ShoppingItem) {}
-
-// Omit - 특정 타입에서 지정된 속성만 제거한 타입을 정의할 수 있다.
-
+/**
+ * Omit - 특정 타입에서 지정된 속성만 제거한 타입을 정의할 수 있다.
+ */
 interface AddressBook {
   name: string;
   phone: number;
@@ -35,7 +32,10 @@ const chingtao: Omit<AddressBook, 'address' | 'company'> = {
   phone: 1224343,
 };
 
-// partial - 타입을 만족하는 일부만을 선택적으로 포함할 수 있다.
+/**
+ * partial - 타입을 만족하는 일부만을 선택적으로 포함할 수 있다.
+ */
+//
 type UpdateProduct = Partial<Product>;
 
 // Partial을 이용한다면 아래와 같이 정의할 필요가 없다.
@@ -47,10 +47,7 @@ type UpdateProduct = Partial<Product>;
 //     stock?: number;
 // }
 
-// 3. 특정 상품 정보를 업데이트 하는 함수
-function updateProductItem(productItem: Partial<Product>) {}
-
-// 4. 유틸리티 타입 구현하기 - Partial
+// 유틸리티 타입 구현하기 - Partial
 interface UserProfile {
   username: string;
   email: string;
@@ -84,3 +81,65 @@ type UserProfileUpdate = {
 type Subset<T> = {
   [p in keyof T]?: T[p];
 };
+
+/**
+ * Uppercase
+ */
+
+type Role = 'admin' | 'user' | 'guest';
+
+// Bad practice 💩
+// type UppercaseRole = 'ADMIN' | 'USER' | 'GUEST';
+
+// Good practice ✅
+type UppercaseRole = Uppercase<Role>; // "ADMIN" | "USER" | "GUEST"
+
+type Role2 = 'ADMIN' | 'USER' | 'GUEST';
+
+/**
+ * Lowercase
+ */
+
+// Bad practice 💩
+// type LowercaseRole = 'admin' | 'user' | 'guest';
+
+// Good practice ✅
+type LowercaseRole = Lowercase<Role2>; // "admin" | "user" | "guest"
+
+/**
+ * Capitalize
+ */
+
+type Role3 = 'admin' | 'user' | 'guest';
+// Bad practice 💩
+// type CapitalizeRole = 'Admin' | 'User' | 'Guest';
+
+// Good practice ✅
+type CapitalizeRole = Capitalize<Role3>; // "Admin" | "User" | "Guest"
+
+/**
+ * Uncapitalize
+ */
+type Role4 = 'Admin' | 'User' | 'Guest';
+// Bad practice 💩
+// type UncapitalizeRole = "admin" | "user" | "guest";
+
+// Good practice ✅
+type UncapitalizeRole = Uncapitalize<Role4>; // "admin" | "user" | "guest"
+
+/**
+ * Required
+ */
+interface Product2 {
+  name?: string;
+  price?: number;
+  tag?: string;
+}
+// Bad practice 💩
+// interface RequiredProduct {
+//   name: string;
+//   price: number;
+//   tag: string;
+// }
+// Good practice ✅
+type RequiredProduct = Required<Product2>;

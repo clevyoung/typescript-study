@@ -183,3 +183,20 @@ type somethingWithExclude = Exclude<something, 'def'>;
 type mappedTypeWithExclude = {
   [k in somethingWithExclude]: string;
 };
+
+interface UserBase {
+  email: string;
+  image: string | null;
+  username: string;
+}
+
+interface UserProfile2 {
+  id: string;
+  email: string;
+  image: string | null;
+  isAdmin: boolean;
+  username: string;
+  reviews: string[];
+}
+
+type ProfileSpecificKeys = Exclude<keyof UserProfile2, keyof UserBase>;

@@ -220,3 +220,29 @@ const user2: IntersectingTypes<UserBase, UserProfile2> = {
   image: null,
   username: 'sampleuser',
 };
+
+/**
+ * NonNullable - NonNullable<T>는 T에서 null과 undefined를 제거한다.
+ */
+
+interface UserBase {
+  email: string;
+  image: string | null;
+  username: string;
+}
+
+type NullableUserBase = UserBase | null;
+
+const missingUser: NullableUserBase = null;
+
+const requiredUser: NonNullable<NullableUserBase> = null;
+
+interface RequiredImage extends UserBase {
+  image: NonNullable<UserBase['image']>;
+}
+
+const user3: RequiredImage = {
+  email: 'hello@example.com',
+  image: 'my/image/url',
+  username: 'sampleuser',
+};

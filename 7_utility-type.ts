@@ -84,6 +84,7 @@ type Subset<T> = {
   [p in keyof T]?: T[p];
 };
 
+// Intrinsic String Manipulation Types
 /**
  * Uppercase
  */

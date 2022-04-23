@@ -25,3 +25,11 @@ let booleanType: boolean = bar; //Type 'unknown' is not assignable to type 'bool
 let numberType: number = bar; // Type 'unknown' is not assignable to type 'number'
 let stringType: string = bar; // Type 'unknown' is not assignable to type 'string'
 let objectType: object = bar; // Type 'unknown' is not assignable to type 'object'
+
+// 유니온 타입에서 unknown은 any를 제외한 모든 타입을 흡수한다.
+type T1 = unknown | null; // unknown
+type T2 = unknown | number; // unknown
+type T3 = unknown | never; // unknown
+type T4 = unknown | unknown; // unknown
+type T5<T> = T | unknown; // unknown
+type T6 = unknown | any; // any
